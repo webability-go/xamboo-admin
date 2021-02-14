@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<application id="adminmenu/group">
+
+  <element type="htmlElement" classname="textmenulink"><![CDATA[<h1>Group of menus</h1>]]></element>
+
+</application>

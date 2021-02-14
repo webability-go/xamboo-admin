@@ -3,13 +3,13 @@ package main
 import (
 	"github.com/webability-go/xcore/v2"
 
-	"github.com/webability-go/xamboo/assets"
+	"github.com/webability-go/xamboo/cms/context"
 	"github.com/webability-go/xamboo/config"
 
 	"admin/app/bridge"
 )
 
-func Run(ctx *assets.Context, template *xcore.XTemplate, language *xcore.XLanguage, e interface{}) interface{} {
+func Run(ctx *context.Context, template *xcore.XTemplate, language *xcore.XLanguage, e interface{}) interface{} {
 
 	ok := bridge.Setup(ctx, bridge.ANY)
 	if !ok {
@@ -24,6 +24,26 @@ func Run(ctx *assets.Context, template *xcore.XTemplate, language *xcore.XLangua
 	}
 	username, _ := ctx.Sessionparams.GetString("username")
 
+	loginlogo, _ := ctx.Sysparams.GetString("loginlogo")
+	welcome, _ := ctx.Sysparams.GetString("loginwelcome")
+	if welcome != "" {
+		language.Set("welcome", welcome)
+	}
+	version := config.Config.Version
+	sversion, _ := ctx.Sysparams.GetString("VERSION")
+	if sversion != "" {
+		version = sversion
+	}
+	headerlogo, _ := ctx.Sysparams.GetString("headerlogo")
+	headertitle, _ := ctx.Sysparams.GetString("headertitle")
+	if headertitle != "" {
+		language.Set("headertitle", headertitle)
+	}
+	footertitle, _ := ctx.Sysparams.GetString("footertitle")
+	if footertitle != "" {
+		language.Set("footertitle", footertitle)
+	}
+
 	//	bridge.EntityLog_LogStat(ctx)
 	params := &xcore.XDataset{
 		"APPLICATION": application,
@@ -31,14 +51,17 @@ func Run(ctx *assets.Context, template *xcore.XTemplate, language *xcore.XLangua
 		"HELP":        "1",
 		"USER":        username,
 		"USERKEY":     userkey,
-		"VERSION":     config.Config.Version,
-		"#":           language,
+		"VERSION":     version,
+		"LOGINLOGO":   loginlogo,
+		"HEADERLOGO":  headerlogo,
+
+		"#": language,
 	}
 
 	return template.Execute(params)
 }
 
-func Formlogin(ctx *assets.Context, template *xcore.XTemplate, language *xcore.XLanguage, e interface{}) interface{} {
+func Formlogin(ctx *context.Context, template *xcore.XTemplate, language *xcore.XLanguage, e interface{}) interface{} {
 
 	ok := bridge.Setup(ctx, bridge.ANY)
 	if !ok {
@@ -69,7 +92,7 @@ func Formlogin(ctx *assets.Context, template *xcore.XTemplate, language *xcore.X
 	return data
 }
 
-func Formpassword(ctx *assets.Context, template *xcore.XTemplate, language *xcore.XLanguage, e interface{}) interface{} {
+func Formpassword(ctx *context.Context, template *xcore.XTemplate, language *xcore.XLanguage, e interface{}) interface{} {
 
 	ok := bridge.Setup(ctx, bridge.ANY)
 	if !ok {
@@ -82,7 +105,7 @@ func Formpassword(ctx *assets.Context, template *xcore.XTemplate, language *xcor
 	return "OK"
 }
 
-func Disconnect(ctx *assets.Context, template *xcore.XTemplate, language *xcore.XLanguage, e interface{}) interface{} {
+func Disconnect(ctx *context.Context, template *xcore.XTemplate, language *xcore.XLanguage, e interface{}) interface{} {
 
 	ok := bridge.Setup(ctx, bridge.ANY)
 	if !ok {

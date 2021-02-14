@@ -40,13 +40,34 @@ function(e)
       </element>
 
       <element id="header_content" type="htmlElement" classname="maintitle" left="0" top="*" height="28"><![CDATA[
-        <img src="/skins/admin/application/wa5.gif" style="vertical-align: middle; height: 27px; margin-right: 10px;" alt="##webabilitylogo##" title="##webabilitylogo##" />
-        ##xamboo## <span class="alttitle">##version##{{VERSION}}</span> - ##adminsite##.]]>
+        <img src="{{HEADERLOGO}}" style="float: left; vertical-align: middle; height: 27px; margin-right: 10px;" alt="##webabilitylogo##" title="##webabilitylogo##" />
+        <span class="alttitle">##headertitle## - ##version##{{VERSION}}- ##adminsite##.</span>]]>
       </element>
 
       <element id="alerts" type="htmlElement" classname="alerttitle" width="300" height="20" right="400" top="26"></element>
       <element id="timer" type="htmlElement" classname="timertitle" width="300" height="20" right="100" top="26"></element>
 
+      <element type="htmlElement" classname="buttonmenuconfig" width="16" height="16" right="50" top="25">
+        <event type="onclick">
+          <code><![CDATA[
+function(e)
+{
+  var node = this._4gl.app.getNode('index|single|app_config');
+  if (!node)
+  {
+    var tree = {tag:'zone',attributes:{id:'app_config',title:'##CONFIG##',closeable:'yes',shortcut:'##CONFIGSHORTCUT##',application:'config|single'}};
+    this._4gl.app.createTree('index|single|application', tree);
+  }
+  this._4gl.app.getNode('index|single|application').activateZone('app_config');
+}
+          ]]></code>
+        </event>
+        <help>
+          <summary>##config.summary##</summary>
+          <title>##config.title##</title>
+          <description>##config.description##</description>
+        </help>
+      </element>
       <element id="help_header" type="htmlElement" classname="buttonmenuhelpfull" width="16" height="16" right="30" top="25">
         <event type="onclick">
           <code><![CDATA[
@@ -112,13 +133,34 @@ function(e)
           <description>##disconnect.description##</description>
         </help>
       </element>
+      <element type="htmlElement" classname="buttonmenuuser" width="16" height="16" right="30" top="5">
+        <event type="onclick">
+          <code><![CDATA[
+function(e)
+{
+  var node = this._4gl.app.getNode('index|single|app_mypage');
+  if (!node)
+  {
+    var tree = {tag:'zone',attributes:{id:'app_mypage',title:'##MYPAGE##',closeable:'yes',shortcut:'##MYPAGESHORTCUT##',application:'mypage|single'}};
+    this._4gl.app.createTree('index|single|application', tree);
+  }
+  this._4gl.app.getNode('index|single|application').activateZone('app_mypage');
+}
+          ]]></code>
+        </event>
+        <help>
+          <summary>##mypage.summary##</summary>
+          <title>##mypage.title##</title>
+          <description>##mypage.description##</description>
+        </help>
+      </element>
       <element type="htmlElement" classname="" width="200" height="20" right="30" top="5"><![CDATA[<table style="width: 200px;"><tr><td id="main_username" class="usertitle">{{USER}}</td></tr></table>]]></element>
 
     </zone>
     <zone id="workarea" size="*">
     </zone>
     <zone id="footer" size="30">
-      <element id="footer_content" type="htmlElement" classname="footertitle" left="0" top="*"><![CDATA[##footer##]]>
+      <element id="footer_content" type="htmlElement" classname="footertitle" left="0" top="*"><![CDATA[##footertitle##]]>
       </element>
     </zone>
   </container>
@@ -133,7 +175,7 @@ function(e)
       <container type="separatorContainer" width="max" height="max" mode="vertical" auto="yes" classname="separatorinvisiblevertical">
         <zone size="80">
           <element type="htmlElement"><![CDATA[
-<img src="/skins/admin/application/wa5.gif" style="margin: 15px; margin-bottom: 0px; float: left;" alt="##logo##" title="##logo##"><br /><span style="font-size: 20px; font-weight: bold; line-height: 1.2em;">##welcometitle##{{VERSION}}</span><span style="font-size: 14px; color: #666;  line-height: 1.2em;"><br />##intro1title##</span><span style="font-size: 12px; color: #333; line-height: 1.4em;"><br />##intro2title##</span>]]></element>
+<img src="{{LOGINLOGO}}" style="margin: 15px; margin-bottom: 0px; float: left; max-height: 65px;" alt="##logo##" title="##logo##"><br /><span style="font-size: 20px; font-weight: bold; line-height: 1.2em;">##welcometitle##{{VERSION}}</span><span style="font-size: 14px; color: #666;  line-height: 1.2em;"><br />##intro1title##</span><span style="font-size: 12px; color: #333; line-height: 1.4em;"><br />##intro2title##</span>]]></element>
         </zone>
         <zone size="*">
           <container id="logintool" type="simpleContainer" width="max" height="max">

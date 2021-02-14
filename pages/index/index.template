@@ -170,13 +170,13 @@ function(e)
               <code><![CDATA[
 function(e)
 {
-  var node = WA.$N('app_file_{id}');
+  var node = WA.$N('app_{id}');
   if (!node)
   {
-    var tree = {tag:'zone',attributes:{id:'app_file_{id}',title:'##FILE.ADMIN## {file}',closeable:'yes',application:'file|{id}',params:'file={file}'}};
+    var tree = {tag:'zone',attributes:{id:'app_{id}',title:'{name}',closeable:'yes',application:'{call1}',params:''}};
     this._4gl.app.createTree('index|single|application', tree);
   }
-  this._4gl.app.getNode('index|single|application').activateZone('app_file_{id}');
+  this._4gl.app.getNode('index|single|application').activateZone('app_{id}');
 }
               ]]></code>
             </event>

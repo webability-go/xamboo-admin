@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"plugin"
 
-	"github.com/webability-go/xamboo/assets"
+	"github.com/webability-go/xamboo/cms/context"
 
 	adminmenubridge "github.com/webability-go/xmodules/adminmenu/bridge"
 	basebridge "github.com/webability-go/xmodules/base/bridge"
@@ -28,7 +28,7 @@ var (
 
 // Setup fabrica el enlace bridge-modulo SO listo para usar. Verifica luego enlace de funciones, verifica login clientes y usuarios, verifica idionas y deviles.
 // Es la primera funcion que hay que llamar cuando se usa el bridge
-func Setup(ctx *assets.Context, connection int) bool {
+func Setup(ctx *context.Context, connection int) bool {
 
 	// is appname is empty: search for "app" entry in ctx
 	appname, _ := ctx.Sysparams.GetString("adminapp")
@@ -69,7 +69,7 @@ func Setup(ctx *assets.Context, connection int) bool {
 	return true
 }
 
-func Start(ctx *assets.Context, lib *plugin.Plugin) error {
+func Start(ctx *context.Context, lib *plugin.Plugin) error {
 	if !linked {
 		err := link(lib)
 		if err != nil {

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<application id="users/profiles">
+
+  <element type="textElement" classname="textmenulink"><![CDATA[Perfiles de Usuarios]]></element>
+
+</application>
