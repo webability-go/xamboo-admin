@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{LANGUAGE}}" lang="{{LANGUAGE}}">
 
 <head>
-  <title>Xamboo Admin</title>
+  <title>##title##</title>
   <meta name="Generator" content="Xamboo(r) v1 - www.webability.info - (c) 1999-2021, Ing. Philippe Thomassigny C." />
   <meta name="Component" content="Admin Engine" />
   <meta http-equiv="PRAGMA" content="NO-CACHE" />

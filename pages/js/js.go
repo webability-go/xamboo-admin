@@ -10,17 +10,17 @@ import (
 	"github.com/webability-go/wajaf/resources"
 	"github.com/webability-go/xcore/v2"
 
-	"github.com/webability-go/xamboo/assets"
+	"github.com/webability-go/xamboo/cms/context"
 )
 
-func Run(ctx *assets.Context, template *xcore.XTemplate, language *xcore.XLanguage, e interface{}) interface{} {
+func Run(ctx *context.Context, template *xcore.XTemplate, language *xcore.XLanguage, e interface{}) interface{} {
 
 	// Va a buscar los datos de la página
 	// JS: core mandatory load for every page
 	js := ctx.Request.Form.Get("js")
 	jss := strings.Split(js, ",")
 
-	reader := NewWJS("./master/public/js/")
+	reader := NewWJS("./admin/public/js/")
 	jsdata, _ := reader.MultiLoad(jss)
 
 	return jsdata

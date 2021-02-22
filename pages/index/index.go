@@ -5,14 +5,14 @@ import (
 
 	"github.com/webability-go/xcore/v2"
 
-	"github.com/webability-go/xamboo"
-	"github.com/webability-go/xamboo/assets"
+	"github.com/webability-go/xamboo/cms"
+	"github.com/webability-go/xamboo/cms/context"
 
 	"admin/app/bridge"
 	bridgeadminmenu "github.com/webability-go/xmodules/adminmenu/bridge"
 )
 
-func Run(ctx *assets.Context, template *xcore.XTemplate, language *xcore.XLanguage, s interface{}) interface{} {
+func Run(ctx *context.Context, template *xcore.XTemplate, language *xcore.XLanguage, s interface{}) interface{} {
 
 	ok := bridge.Setup(ctx, bridge.USER)
 	if !ok {
@@ -27,7 +27,7 @@ func Run(ctx *assets.Context, template *xcore.XTemplate, language *xcore.XLangua
 	return template.Execute(params)
 }
 
-func Menu(ctx *assets.Context, template *xcore.XTemplate, language *xcore.XLanguage, s interface{}) interface{} {
+func Menu(ctx *context.Context, template *xcore.XTemplate, language *xcore.XLanguage, s interface{}) interface{} {
 
 	ok := bridge.Setup(ctx, bridge.USER)
 	if !ok {
@@ -37,11 +37,11 @@ func Menu(ctx *assets.Context, template *xcore.XTemplate, language *xcore.XLangu
 	Order := ctx.Request.Form.Get("Order")
 
 	if Order == "get" {
-		return getMenu(ctx, s.(*xamboo.Server), language, "")
+		return getMenu(ctx, s.(*cms.CMS), language, "")
 	}
 	if Order == "getchildren" {
 		father := ctx.Request.Form.Get("father")
-		return getMenu(ctx, s.(*xamboo.Server), language, father)
+		return getMenu(ctx, s.(*cms.CMS), language, father)
 	}
 	if Order == "openclose" {
 
@@ -55,7 +55,7 @@ func Menu(ctx *assets.Context, template *xcore.XTemplate, language *xcore.XLangu
 	}
 }
 
-func getMenu(ctx *assets.Context, s *xamboo.Server, language *xcore.XLanguage, father string) map[string]interface{} {
+func getMenu(ctx *context.Context, s *cms.CMS, language *xcore.XLanguage, father string) map[string]interface{} {
 
 	rows := []interface{}{}
 
@@ -82,7 +82,7 @@ func getMenu(ctx *assets.Context, s *xamboo.Server, language *xcore.XLanguage, f
 
 	ds := bridge.GetDatasource(ctx, "")
 
-	options, _ := bridgeadminmenu.ModuleAdminMenu.GetMenu(ds, "admin", father)
+	options, _ := bridgeadminmenu.ModuleAdminMenu.GetMenu(ds, "_admin", father)
 
 	fmt.Println(options)
 	for _, option := range *options {

@@ -3,11 +3,11 @@
 
     <!-- ENTORNO -->
     <entry id="loading"><![CDATA[Cargando...]]></entry>
-    <entry id="xamboo"><![CDATA[Xamboo&reg;]]></entry>
+    <entry id="headertitle"><![CDATA[Xamboo&reg;]]></entry>
     <entry id="logo"><![CDATA[Xamboo&reg;]]></entry>
     <entry id="adminsite">Sitio de Administración</entry>
     <entry id="version">v</entry>
-    <entry id="footer"><![CDATA[Xamboo&reg; v1 &copy; 2000-2021 - Admin Engine]]></entry>
+    <entry id="footertitle"><![CDATA[Xamboo&reg; v1 &copy; 2000-2021 - Admin Engine]]></entry>
 
     <entry id="CONSOLE"><![CDATA[Co<u>n</u>sola]]></entry>
     <entry id="CONSOLESHORTCUT"><![CDATA[alt+n]]></entry>
