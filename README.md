@@ -23,6 +23,14 @@ TO DO
 Version Changes Control
 =======================
 
+v0.0.5 - 2022-06-13
+-----------------------
+- Compatible with Xamboo 1.6
+
+V0.0.4 - 2021-04-22
+-----------------------
+- Changes to meet the new xmodules structure: remove the bridge, use directly the functions into the application, adapt all the pages to the code
+
 V0.0.3 - 2021-02-21
 -----------------------
 - Adaptation to Xamboo v1.5.0 not compatible with previous versions

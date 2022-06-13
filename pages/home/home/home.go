@@ -24,6 +24,9 @@ func Run(ctx *context.Context, template *xcore.XTemplate, language *xcore.XLangu
 	css, _ := ctx.Sysparams.GetString("maincss")
 	if css != "" {
 		params.Set("CSS", "WA.Managers.ondemand.loadCSS('"+css+"', cssloaded, false);")
+		params.Set("NUMCSS", "4")
+	} else {
+		params.Set("NUMCSS", "3")
 	}
 
 	return template.Execute(params)
