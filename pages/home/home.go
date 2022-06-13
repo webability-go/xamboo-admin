@@ -26,7 +26,7 @@ func Run(ctx *context.Context, template *xcore.XTemplate, language *xcore.XLangu
 		ctx.Request.RequestURI = original
 		ctx.Request.URL.Path = original
 		http.FileServer(http.Dir(alternatepublic)).ServeHTTP(ctx.Writer, ctx.Request)
-		return nil
+		return ""
 	}
 
 	if alternatepages != "" {
@@ -36,6 +36,8 @@ func Run(ctx *context.Context, template *xcore.XTemplate, language *xcore.XLangu
 		s.(*cms.CMS).PagesDir = thispagedir
 		return data
 	}
+
+	// Search into every installed module pages
 
 	return "Error 404, there is no alternatepublic or alternatepage: " + alternatepublic + original + " " + alternatepages + original
 }

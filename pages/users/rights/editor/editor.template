@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<application id="users/rights/editor">
-
-  <element type="textElement" classname="textmenulink"><![CDATA[Administrar Un Derecho de Uso]]></element>
-
-</application>

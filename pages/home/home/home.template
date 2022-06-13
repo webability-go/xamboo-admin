@@ -12,7 +12,7 @@ var numcss = 0;
 function cssloaded()
 {
   numcss++;
-  if (numcss == 3) // we call APP once we have loaded the 3 CSS to avoid a resize
+  if (numcss == {{NUMCSS}}) // we call APP once we have loaded the {{NUMCSS}} CSS to avoid a resize
     WA.Managers.wa4gl.startApplication('wa4glcontainer', 'main', 'single', '', 'full');
 }
 

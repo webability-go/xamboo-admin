@@ -3,11 +3,11 @@ package main
 import (
 	"golang.org/x/text/language"
 
-	"github.com/webability-go/xmodules/adminmenu"
+	_ "github.com/webability-go/xmodules/adminmenu"
 	"github.com/webability-go/xmodules/base"
 	"github.com/webability-go/xmodules/tools"
 	"github.com/webability-go/xmodules/user"
-	"github.com/webability-go/xmodules/useradmin"
+	"github.com/webability-go/xmodules/user/assets"
 
 	"github.com/webability-go/xamboo/applications"
 	"github.com/webability-go/xamboo/cms/context"
@@ -34,18 +34,25 @@ func init() {
 type LocalApp struct{}
 
 func (la *LocalApp) StartHost(h config.Host) {
+
 	// Any host that use THIS app should have the same datasource container
 	if Container == nil {
 		DatasourceContainerName, _ = h.CMS.Config.GetString("datasourcecontainername")
 		DatasourceContainerFile, _ = h.CMS.Config.GetString("datasourcecontainer")
-		Container = base.Create(DatasourceContainerFile)
-		base.Containers.AddContainer(DatasourceContainerName, Container)
+		// Lock and create Containers
+		base.ContainersLock.Lock()
+		Container = base.Containers.GetContainer(DatasourceContainerName)
+		if Container == nil {
+			Container = base.Create(DatasourceContainerFile)
+			base.Containers.AddContainer(DatasourceContainerName, Container)
+		}
+		base.ContainersLock.Unlock()
 	}
 }
 
 func (la *LocalApp) StartContext(ctx *context.Context) {
 
-	ds := Container.TryDatasource(ctx, "userdatasource")
+	ds := Container.TryDatasource(ctx, assets.DATASOURCE)
 	if ds == nil {
 		return
 	}
@@ -63,9 +70,3 @@ func (la *LocalApp) GetDatasourceSet() applications.DatasourceSet {
 func (la *LocalApp) GetCompiledModules() applications.ModuleSet {
 	return base.ModulesList
 }
-
-// Modules linkers
-var ModuleBase = base.ModuleBase
-var ModuleUser = user.ModuleUser
-var ModuleAdminMenu = adminmenu.ModuleAdminMenu
-var ModuleUserAdmin = useradmin.ModuleUserAdmin
