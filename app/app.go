@@ -3,15 +3,15 @@ package main
 import (
 	"golang.org/x/text/language"
 
+	"github.com/webability-go/xamboo/applications"
+	"github.com/webability-go/xamboo/cms/context"
+	"github.com/webability-go/xamboo/config"
+
 	_ "github.com/webability-go/xmodules/adminmenu"
 	"github.com/webability-go/xmodules/base"
 	"github.com/webability-go/xmodules/tools"
 	"github.com/webability-go/xmodules/user"
 	"github.com/webability-go/xmodules/user/assets"
-
-	"github.com/webability-go/xamboo/applications"
-	"github.com/webability-go/xamboo/cms/context"
-	"github.com/webability-go/xamboo/config"
 )
 
 const (
