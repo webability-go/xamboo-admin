@@ -1,0 +1,102 @@
+{
+  "hosts": [
+    {
+      "name": "admin",
+      "listeners": ["https"],
+      "hostnames": ["admin.webability.info"],
+      "cert": "./example/ssl/cert.pem",
+      "key": "./example/ssl/privkey.pem",
+
+      "plugins": [
+        { "Name":"app-admin",
+          "Library": "./admin/app/app.so"
+        }
+      ],
+
+      "redirect": {
+        "enabled": true,
+        "scheme": "https",
+        "host": "admin.webability.info:83"
+      },
+
+      "origin": {
+        "enabled": true,
+        "maindomains": ["webability.info"],
+        "default": "https://admin.webability.info",
+        "methods": ["GET", "POST", "DELETE", "PUT", "OPTIONS"],
+        "headers": ["Accept", "Content-Type", "Content-Length", "Accept-Encoding", "X-CSRF-Token", "Authorization", "Origin", "X-Requested-With", "Method"],
+        "credentials": true
+      },
+
+      "auth": {
+        "enabled": true,
+        "realm": "Admin for Xamboo (xamboo/xamboo)",
+        "user": "xamboo",
+        "pass": "xamboo"
+      },
+
+      "prot": {
+        "enabled": true,
+        "sql": true,
+        "threshold": 3,
+        "ignore": []
+      },
+
+      "compress": {
+        "enabled": true,
+        "mimes": ["text/html", "text/css", "application/javascript", "application/json"],
+        "files": ["*.ico", "*.css", "*.js", "*.html"]
+      },
+
+      "fileserver": {
+        "enabled": true,
+        "takeover": false,
+        "static": "./admin/public"
+      },
+
+      "minify": {
+        "enabled": false,
+        "html": true,
+        "css": true,
+        "js": true,
+        "json": true,
+        "svg": true,
+        "xml": true
+      },
+
+      "cms": {
+        "enabled": true,
+        "config": ["./admin/config/admin.conf"],
+        "engines": {
+          "simple": true,
+          "library": true,
+          "template": true,
+          "language": true,
+          "wajafapp": true,
+          "box": true,
+          "integrator": true
+        },
+        "browser": {
+          "enabled": true,
+          "useragent": {
+            "enabled": true,
+            "comments": "The context.Version will have one of: computer, phone, tablet, tv, console, wearable, base when the module is enabled"
+          }
+        }
+      },
+      "error": {
+        "enabled": true
+      },
+
+      "log": {
+        "enabled": true,
+        "pages": "file:./example/logs/xamboo-admin-pages.log",
+        "pagesformat": "%requestid% %clientip% %method% %protocol% %code% %request% %duration% %bytesout% %bytestocompress% %bytestominify%",
+        "pagesformatavailable": "use any of: %bytesout% %bytestocompress% %bytestominify% %clientip% %clientport% %code% %duration% %hostid% %listenerid% %listenerip% %listenerport% %protocol% %method% %request% %starttime% %endtime% %requestid%",
+        "errors": "file:./example/logs/xamboo-admin-errors.log",
+        "sys": "file:./example/logs/xamboo-admin-sys.log",
+        "stats": "discard"
+      }
+    }
+  ]
+}
